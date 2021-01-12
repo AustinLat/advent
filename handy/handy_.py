@@ -2,6 +2,7 @@ def handy():
     with open("input.txt", "r") as r:
         all_lines = r.read()
 
+
     bag_count = 0
     bags_for_gold = {}
     for rule in all_lines.splitlines():
@@ -47,6 +48,5 @@ def handy():
 
     # print(bags_for_gold)
     # print(bag_count)
-
 
 handy()
