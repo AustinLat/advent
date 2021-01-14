@@ -1,56 +1,63 @@
-# with open("input.txt", "r") as data:
-#     data = data.read().splitlines()
-#     data = [line for line in data]
-
-data = """nop +0
-    acc +1
-    jmp +4
-    acc +3
-    jmp -3
-    acc -99
-    acc +1
-    jmp -4
-    acc +6"""
-data = data.splitlines()
-data = [line for line in data]
-
-visited = []
-index = 0
-aac = 0
-command = data[index]
-while True:
-    visited.append(index)
-    if index  == len(data):
-        break
-
-    if command.split(" ")[0] == "acc":
-        aac += int(command.split(" ")[1])
-        index = index + 1
-
-    if command.split(" ")[0] == "jmp":
-        if "+" in command.split(" ")[1]:
-            number = int(command.split(" ")[1][1:])
-        else:
-            number = int(command.split(" ")[1])
-        index = index + number
-
-    if command.split(" ")[0] == "nop":
-        index = index + 1
+with open("input.txt", "r") as data:
+    data = data.readlines()
+    data = [line.strip() for line in data]
 
 
+def get_acc():
+    visited = []
+    index = 0
+    aac = 0
+    while index not in visited:
+        visited.append(index)
 
-    if index in visited:
-        index = visited[-2]
+        command = data[index]
+        command = command.split()
+        cmd = command[0]
+        cmd_value = int(command[1])
 
-        if command.split(" ")[0] == "jmp":
-            command = "nop" + " " + command.split(" ")[1]
-        else:
-            command = "jmp" + " " + command.split(" ")[1]
+        if cmd == "acc":
+            aac += cmd_value
+            index = index + 1
+        elif cmd == "jmp":
+            index += cmd_value
+        elif cmd == "nop":
+            index += 1
 
-    command = data[index]
 
+    return aac
 
+#part 2
+def get_aac_end():
+    visited = []
+    index = 0
+    aac = 0
+    while index not in visited:
+        visited.append(index)
 
-    print(visited)
-    print(index)
-    print(aac)
+        command = data[index]
+        command = command.split()
+        cmd = command[0]
+        cmd_value = int(command[1])
+
+        if cmd == "acc":
+            aac += cmd_value
+            index = index + 1
+        elif cmd == "jmp":
+            index += cmd_value
+        elif cmd == "nop":
+            index += 1
+
+        if index == len(data):
+            return aac, True
+    return aac, False
+
+for i in range(len(data)):
+    if "jmp" in data[i]:
+        data[i] = data[i].replace("jmp", "nop")
+        acc, found = get_aac_end()
+        if found:
+            print(acc)
+            break
+
+    else:
+        data[i] = data[i].replace("nop", "jmp")
