@@ -2,6 +2,16 @@ with open("input.txt", "r") as data:
     data = data.readlines()
     data = [line.strip() for line in data]
 
+# data = """nop +0
+# acc +1
+# jmp +4
+# acc +3
+# jmp -3
+# acc -99
+# acc +1
+# jmp -4
+# acc +6"""
+# data = data.splitlines()
 
 def get_acc():
     visited = []
@@ -9,7 +19,6 @@ def get_acc():
     aac = 0
     while index not in visited:
         visited.append(index)
-
         command = data[index]
         command = command.split()
         cmd = command[0]
@@ -33,7 +42,6 @@ def get_aac_end():
     aac = 0
     while index not in visited:
         visited.append(index)
-
         command = data[index]
         command = command.split()
         cmd = command[0]
@@ -58,6 +66,14 @@ for i in range(len(data)):
         if found:
             print(acc)
             break
+        else:
+            data[i] = data[i].replace("nop", "jmp")
 
     else:
         data[i] = data[i].replace("nop", "jmp")
+        acc, found = get_aac_end()
+        if found:
+            print(acc)
+            break
+        else:
+            data[i] = data[i].replace("jmp", "nop")
