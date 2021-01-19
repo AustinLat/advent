@@ -1,44 +1,31 @@
-# with open("input.txt", "r") as r:
-#     data = r.read()
-#     data = data.splitlines()
-
-data = """35
-20
-15
-25
-47
-40
-62
-55
-65
-95
-102
-117
-150
-182
-127
-219
-299
-277
-309
-576"""
-
-data = data.splitlines()
+with open("input.txt", "r") as r:
+    data = r.read()
+    data = data.splitlines()
 
 def odd_man_out(sum_to):
-    index = sum_to
-    while index != len(data):
-        for i in range((index - sum_to), (index)):
-            print(data[i])
-            for n in range((index - sum_to), (index)+1):
 
-                # print(data[n])
+    for num in range(sum_to, len(data)):
+        checker = False
+        for i in range((num - sum_to), (num)):
+            for n in range((num - sum_to), (num)):
                 if data[i] == data[n]:
                     continue
-                if data[i] + data[n] == data[index]:
-                    print("got it")
+                if int(data[i]) + int(data[n]) == int(data[num]):
+                    checker = True
+        if checker is False:
+            return int(data[num])
+# print(odd_man_out(25))
 
-        index += 1
+#First part
+def in_a_row():
+    odd_number = odd_man_out(25)
+    for num in range(len(data)):
+        total_tracker = [int(data[num])]
 
+        for i in range(num+1, len(data)):
+            total_tracker.append(int(data[i]))
+            if sum(total_tracker) == odd_number:
 
-odd_man_out(5)
+                print(min(total_tracker) + max(total_tracker))
+
+in_a_row()

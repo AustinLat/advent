@@ -1,17 +1,7 @@
+
 with open("input.txt", "r") as data:
     data = data.readlines()
     data = [line.strip() for line in data]
-
-# data = """nop +0
-# acc +1
-# jmp +4
-# acc +3
-# jmp -3
-# acc -99
-# acc +1
-# jmp -4
-# acc +6"""
-# data = data.splitlines()
 
 def get_acc():
     visited = []
@@ -31,8 +21,6 @@ def get_acc():
             index += cmd_value
         elif cmd == "nop":
             index += 1
-
-
     return aac
 
 #part 2
