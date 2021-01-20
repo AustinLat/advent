@@ -21,11 +21,9 @@ def in_a_row():
     odd_number = odd_man_out(25)
     for num in range(len(data)):
         total_tracker = [int(data[num])]
-
         for i in range(num+1, len(data)):
             total_tracker.append(int(data[i]))
             if sum(total_tracker) == odd_number:
-
                 print(min(total_tracker) + max(total_tracker))
 
 in_a_row()
