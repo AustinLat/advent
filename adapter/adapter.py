@@ -38,6 +38,7 @@ def total_configurations():
             sol[number]+=sol[number-2]
         if number - 3 in sol:
             sol[number]+=sol[number-3]
+    print(sol)
     return sol[max(data)]
 
 print(total_configurations())
