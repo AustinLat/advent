@@ -3,6 +3,8 @@ import operator
 with open("input.txt", "r") as r:
     data = r.read().strip()
 
+
+
 neighbors = [(-1,-1), (-1,0), (-1,1), (0,-1), (0,1), (1,-1), (1,0), (1,1)]
 
 data = data.splitlines()
