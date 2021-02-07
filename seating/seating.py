@@ -16,41 +16,45 @@ def coord_seats(seating):
             coords_seating[(row_count, collum_count)] = seat
     return coords_seating
 
-def neighbortime():
-    for neighbor in neighbors:
-        neighbor_coord = tuple(map(operator.add, coord, neighbor))
 
-        if neighbor_coord not in coord_seats:
-            continue
-        if coord_seats[neighbor_coord] == "#":
-            occupied += 1
-        # if coord_seats[neighbor_chord] == "L":
 
 def occupied_seating(coord_seats):
     while True:
         new_seating = {}
         for coord, seat in coord_seats.items():
             occupied = 0
-            neighbortime()
-            # for neighbor in neighbors:
-            #     neighbor_coord = tuple(map(operator.add, coord, neighbor))
-            #
-            #     if neighbor_coord not in coord_seats:
-            #         continue
-            #     if coord_seats[neighbor_coord] == "#":
-            #         occupied += 1
+
+            for neighbor in neighbors:
+                neighbor_coord = tuple(map(operator.add, coord, neighbor))
+
+                if neighbor_coord not in coord_seats:
+                    continue
+                if coord_seats[neighbor_coord] == ".":
+                    new_neighbor = neighbor
+                    while coord_seats[neighbor_coord] == ".":
+                        neighbor_coord = tuple(map(operator.add, new_neighbor, neighbor))
+                        new_neighbor = tuple(map(operator.add, new_neighbor, neighbor))
+                        if neighbor_coord not in coord_seats:
+                            break
+                        if coord_seats[new_neighbor] == "#":
+                            occupied += 1
+                            break
+                        if coord_seats[new_neighbor] == "L":
+                            break
+                elif coord_seats[neighbor_coord] == "#":
+                    occupied += 1
 
 
 
             if seat == ".":
                 new_seating[coord] = seat
-            elif seat == "L":
+            if seat == "L":
                 if occupied == 0:
                     new_seating[coord] = "#"
                 else:
                     new_seating[coord] = seat
             elif seat == "#":
-                if occupied >= 4:
+                if occupied >= 5:
                     new_seating[coord] = "L"
                 else:
                     new_seating[coord] = seat
