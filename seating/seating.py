@@ -1,18 +1,10 @@
 import operator
 
+
 with open("input.txt", "r") as r:
     data = r.read().strip()
-
-
-
-neighbors = [(-1,-1), (-1,0), (-1,1), (0,-1), (0,1), (1,-1), (1,0), (1,1)]
-
 data = data.splitlines()
-
-
-
-
-
+neighbors = [(-1,-1), (-1,0), (-1,1), (0,-1), (0,1), (1,-1), (1,0), (1,1)]
 
 def occupied_seating():
     coords_seating = {}
@@ -46,7 +38,6 @@ def occupied_seating():
                 elif coords_seating[neighbor_coord] == "#":
                     occupied += 1
 
-
             if seat == "L":
                 if occupied == 0:
                     new_seating[coord] = "#"
@@ -60,8 +51,8 @@ def occupied_seating():
 
         if coords_seating == new_seating:
             break
-        coords_seating = new_seating
-
+        else:
+            coords_seating = new_seating
 
     occupied_counter = 0
     for coord, seat in coords_seating.items():
