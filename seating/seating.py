@@ -11,8 +11,9 @@ def occupied_seating():
     for row_count, row in enumerate(data):
         for collum_count, seat in enumerate(row):
             coords_seating[(row_count, collum_count)] = seat
-
+    counter = 0
     while True:
+        
         new_seating = {}
         for coord, seat in coords_seating.items():
             if seat == ".":
@@ -54,12 +55,14 @@ def occupied_seating():
         if coords_seating == new_seating:
             break
         else:
+            counter += 1
             coords_seating = new_seating
 
     occupied_counter = 0
     for coord, seat in coords_seating.items():
         if seat == "#":
             occupied_counter += 1
+    print(f"ran {counter} times")
     print(occupied_counter)
 
 occupied_seating()
