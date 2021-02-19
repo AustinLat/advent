@@ -2,7 +2,7 @@ import operator
 
 
 
-#def navigation():    
+#def navigation():
 #    with open("input.txt", "r") as r:
 #         data = r.read()
 #         data = data.splitlines()
@@ -31,7 +31,7 @@ import operator
 #
 #        if inst == "F":
 #            if direction == 90:
-#                grid = tuple(map(operator.add, grid, (0, distance)))  
+#                grid = tuple(map(operator.add, grid, (0, distance)))
 #            elif direction == 360:
 #                grid = tuple(map(operator.add, grid, (distance, 0)))
 #            elif direction == 180:
@@ -46,8 +46,8 @@ import operator
 #            grid = tuple(map(operator.add, grid, (-(distance), 0)))
 #        elif instruction[0] == "W":
 #            grid = tuple(map(operator.add, grid, (0, -(distance))))
-#      
-#        print(f'after movement direction is {direction}')        
+#
+#        print(f'after movement direction is {direction}')
 #        print(grid)
 #    manhattan = (abs(grid[0])) + (abs(grid[1]))
 #   return manhattan
@@ -55,50 +55,44 @@ import operator
 #print(navigation())
 
 
-
-
-def navigation():    
+def navigation():
     with open("input.txt", "r") as r:
          data = r.read()
          data = data.splitlines()
 
-    direction = 90
     grid = (0, 0)
     waypoint = (1, 10)
     for instruction in data:
         inst = instruction[0]
         distance = int(instruction[1:])
 
-        # Need to figure out how to rotate the waypoint around the
-        # ship 90 degrees (negatives and positives)
         if inst == "R":
-            if direction == 180:
+            if distance == 180:
                 waypoint = (-(waypoint[0]), -(waypoint[1]))
-            if direction == 90:
-                waypoint = (-(waypoint[1]), waypoint[0]) 
-        if inst == "L": 
-            if direction == 180:
+            if distance == 90:
+                waypoint = (-(waypoint[1]), waypoint[0])
+        elif inst == "L":
+            if distance == 180:
                 waypoint = (-(waypoint[0]), -(waypoint[1]))
-            if direction == 90: 
-                waypoint = (-(waypoint[1]), waypoint[0])   
-        
-        if inst == "F":
-            movement = tuple(map(lambda x: x * distance, waypoint)) 
-            grid = tuple(map(operator.add, grid, movement))  
-        elif instruction[0] == "N":
+            if distance == 90:
+                waypoint = (waypoint[1], (-waypoint[0]))
+
+        elif inst == "F":
+            movement = tuple(map(lambda x: x * distance, waypoint))
+            grid = tuple(map(operator.add, grid, movement))
+        elif inst == "N":
             waypoint = tuple(map(operator.add, waypoint, (distance, 0)))
-        elif instruction[0] == "E":
+        elif inst == "E":
             waypoint = tuple(map(operator.add, waypoint, (0, distance)))
-        elif instruction[0] == "S":
+        elif inst == "S":
             waypoint = tuple(map(operator.add, waypoint, (-(distance), 0)))
-        elif instruction[0] == "W":
+        elif inst == "W":
             waypoint = tuple(map(operator.add, waypoint, (0, -(distance))))
-      
-    manhattan = (abs(grid[0])) + (abs(grid[1]))
-    return manhattan
+
+    return (abs(grid[0])) + (abs(grid[1]))
 
 print(navigation())
 
 
-#if __name__ == "__main__":
-#    navigation()
+if __name__ == "__main__":
+   navigation()
