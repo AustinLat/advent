@@ -73,24 +73,26 @@ def navigation():
         # ship 90 degrees (negatives and positives)
         if inst == "R":
             if direction == 180:
-                waypoint = (-(waypoint[1]), -(waypoint[0]))
-            if direction = 90:
-                waypoint = (
+                waypoint = (-(waypoint[0]), -(waypoint[1]))
+            if direction == 90:
+                waypoint = (-(waypoint[1]), waypoint[0]) 
         if inst == "L": 
             if direction == 180:
-                waypoint = (-(waypoint[1]), -(waypoint[0])) 
+                waypoint = (-(waypoint[0]), -(waypoint[1]))
+            if direction == 90: 
+                waypoint = (-(waypoint[1]), waypoint[0])   
         
         if inst == "F":
-            movement = tuple(map(lambda x: x * distance, waypoint) 
+            movement = tuple(map(lambda x: x * distance, waypoint)) 
             grid = tuple(map(operator.add, grid, movement))  
         elif instruction[0] == "N":
-            grid = tuple(map(operator.add, waypoint, (distance, 0)))
+            waypoint = tuple(map(operator.add, waypoint, (distance, 0)))
         elif instruction[0] == "E":
-            grid = tuple(map(operator.add, waypoint, (0, distance)))
+            waypoint = tuple(map(operator.add, waypoint, (0, distance)))
         elif instruction[0] == "S":
-            grid = tuple(map(operator.add, waypoint, (-(distance), 0)))
+            waypoint = tuple(map(operator.add, waypoint, (-(distance), 0)))
         elif instruction[0] == "W":
-            grid = tuple(map(operator.add, waypoint, (0, -(distance))))
+            waypoint = tuple(map(operator.add, waypoint, (0, -(distance))))
       
     manhattan = (abs(grid[0])) + (abs(grid[1]))
     return manhattan
