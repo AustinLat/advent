@@ -60,6 +60,7 @@ def navigation():
          data = r.read()
          data = data.splitlines()
 
+    
     grid = (0, 0)
     waypoint = (1, 10)
     for instruction in data:
@@ -71,11 +72,15 @@ def navigation():
                 waypoint = (-(waypoint[0]), -(waypoint[1]))
             if distance == 90:
                 waypoint = (-(waypoint[1]), waypoint[0])
+            if distance == 270:
+                waypoint = (waypoint[1], -(waypoint[0]))
         elif inst == "L":
             if distance == 180:
                 waypoint = (-(waypoint[0]), -(waypoint[1]))
             if distance == 90:
-                waypoint = (waypoint[1], (-waypoint[0]))
+                waypoint = (waypoint[1], -(waypoint[0]))
+            if distance == 270:
+                waypoint = (-(waypoint[1]), waypoint[0])
 
         elif inst == "F":
             movement = tuple(map(lambda x: x * distance, waypoint))
@@ -96,3 +101,4 @@ print(navigation())
 
 if __name__ == "__main__":
    navigation()
+
