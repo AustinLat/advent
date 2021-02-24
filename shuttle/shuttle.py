@@ -1,3 +1,4 @@
+import numpy as np
 def shuttle():
 	with open("input.txt", "r") as r:
 		data = r.read()
@@ -5,7 +6,7 @@ def shuttle():
 	time = 0
 	buses = data[1].split(",")
 	#buses[:] = [int(i) for i in buses if i != "x"]
-    
+        np_buses = np.array(buses)            
     
 	while True:
 		time = time + int(buses[0])
