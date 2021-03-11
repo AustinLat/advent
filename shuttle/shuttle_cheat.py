@@ -1,5 +1,6 @@
 from math import gcd
 
+
 def lcm(a):
 	lcm = a[0][0]
 	for i in a[1:]:
@@ -10,9 +11,7 @@ with open("input.txt") as file:
 	data = file.read().split("\n")
 
 buses = []
-
 offset = 0
-
 for x in data[1:][0].split(","):
 	if x != "x":
 		buses.append([int(x), offset])
