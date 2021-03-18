@@ -1,23 +1,6 @@
-# with open("input.txt", "r") as r:
-#     data = r.read().splitlines()
+with open("input.txt", "r") as r:
+    data = r.read().splitlines()
 
-<<<<<<< HEAD
-data = """16
-10
-15
-5
-1
-11
-7
-19
-6
-12
-4"""
-
-data = data.splitlines()
-
-print(data)
-=======
 def adapter_tester():
     with open("input.txt", "r") as r:
         data = r.read().splitlines()
@@ -59,4 +42,4 @@ def total_configurations():
     return sol[max(data)]
 
 print(total_configurations())
->>>>>>> a731368dec027cef69f370f841c142f1a922f985
+
