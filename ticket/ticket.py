@@ -1,12 +1,5 @@
+
 def ticket():
-<<<<<<< HEAD
-    
-
-
-
-if __name__=="__main__":
-    ticket()
-=======
 	with open("input.txt", "r") as f:
 		data = f.read()
 		chunks = data.split("\n\n")
@@ -33,4 +26,3 @@ if __name__=="__main__":
 
 if __name__=="__main__":
 	ticket()
->>>>>>> 941ed98b191d821e0219023ccae4157c6ea83e0e
