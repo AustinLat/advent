@@ -21,15 +21,23 @@ def ticket():
 			##checking neighbors ticket numbers against all rules
 			valid = False
 			for rul, rnge in valid_ranges.items():
-				rngs = rnge.split(" or ")
-				first_rng = rngs[0].split("-")
-				second_rng = rngs[1].split("-")
-				if int(number) in range(int(first_rng[0]), int(first_rng[1])+1) or int(number) in range(int(second_rng[0]), int(second_rng[1])+1):
-					valid = True
+				valid = rule_validator(number, rnge)
+				if valid == True:
+					break
 			if valid == False:
 				error_rate += int(number)
 	print(error_rate)		 
-				
+
+##Helper function to run the current number through all the validation ranges
+def rule_validator(num, rng):
+	rngs = rng.split(" or ")
+	first_rng, second_rng = rngs[0].split("-"), rngs[1].split("-")
+	fst = (int(first_rng[0]), int(first_rng[1])+1)
+	snd = (int(second_rng[0]), int(second_rng[1])+1)
+	if int(num) in range(fst[0], fst[1]) or int(num) in range(snd[0], snd[1]):	
+		return True
+	return False			
+
 
 if __name__=="__main__":
 	ticket()
