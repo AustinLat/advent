@@ -23,7 +23,7 @@ def recitation2(sequence):
             last = new_num
         turn += 1
          
-        print(turn)
+        #print(turn)
     print(last)
 
 if __name__=="__main__":
