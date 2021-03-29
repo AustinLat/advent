@@ -1,5 +1,7 @@
+from collections import Counter
+
+
 valid_tickets = []
-ticket_lines = []
 
 with open("input.txt", "r") as f:
         data = f.read()
@@ -13,8 +15,8 @@ def make_dic(chunk):
         valid_ranges[rule] = rng 
     return valid_ranges
 
-def ticket_maker(): 
-    return chunks[2].splitlines()[1:]
+def ticket_maker(chunk): 
+    return chunk[2].splitlines()[1:]
 
 def ticket(tickets, dic):
     for line in tickets:
@@ -43,9 +45,17 @@ def number_validation(num, rng):
         return True
     return False
 
-def ticket_order(valid_list):
-    print(valid_list)
+def ticket_order(valid_ticket_list, dic):
+	pair_list = []
+	for ticket in valid_ticket_list:
+		for index, number in enumerate(ticket.split(",")):
+			for rul, rng in dic.items():
+				if number_validation(number, rng):
+					pair_list.append((index, rul))	
+	print(len(valid_ticket_list))
+	c = Counter(pair_list)
+	print(c.most_common(21))
 
 if __name__=="__main__": 
-    ticket(ticket_maker(), make_dic(chunks))
-    ticket_order(valid_tickets)
+    ticket(ticket_maker(chunks), make_dic(chunks))
+    ticket_order(valid_tickets, make_dic(chunks))
