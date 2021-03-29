@@ -1,31 +1,36 @@
-def ticket():
-    valid_tickets = []
-    with open("input.txt", "r") as f:
+valid_tickets = []
+ticket_lines = []
+
+with open("input.txt", "r") as f:
         data = f.read()
         chunks = data.split("\n\n")
-    ##making rule ditionary
-    valid_ranges = {}
-    for line in chunks[0].splitlines():
+
+def make_dic(chunk):
+    valid_ranges = {} 
+    for line in chunk[0].splitlines():
         rng = line.split(":")[1][1:]
         rule = line.split(":")[0]
-        valid_ranges[rule] = rng
-    ticket_lines = chunks[2].splitlines()[1:]
-    ##looping through tickets
-    for line in ticket_lines:
+        valid_ranges[rule] = rng 
+    return valid_ranges
+
+def ticket_maker(): 
+    return chunks[2].splitlines()[1:]
+
+def ticket(tickets, dic):
+    for line in tickets:
         ##looping through ticket numbers
         line_valid = True
         for number in line.split(","):
             ##checking neighbors ticket numbers against all rules
             valid = False
-            for rul, rnge in valid_ranges.items():
+            for rul, rnge in dic.items():
                 validation = number_validation(number, rnge)
                 if validation == True:
                     valid = True
             if valid == False:
                 line_valid = False
         if line_valid == True:
-            valid_tickets.append(line)
-                    
+            valid_tickets.append(line)                    
 
 ##Helper function for running each number through all the tests
 def number_validation(num, rng):
@@ -38,6 +43,9 @@ def number_validation(num, rng):
         return True
     return False
 
+def ticket_order(valid_list):
+    print(valid_list)
 
-if __name__=="__main__":
-	ticket()
+if __name__=="__main__": 
+    ticket(ticket_maker(), make_dic(chunks))
+    ticket_order(valid_tickets)
