@@ -24,6 +24,7 @@ def ticket():
                 error_rate += int(number)
     print(error_rate)		 
 
+<<<<<<< HEAD
 ##Helper function for running each number through all the tests
 def number_validation(num, rng):
     rngs = rng.split(" or ")
@@ -36,6 +37,32 @@ def number_validation(num, rng):
     return False
     
 				
+=======
+	##looping through tickets
+	for line in ticket_lines:
+		##looping through ticket numbers
+		for number in line.split(","):
+			##checking neighbors ticket numbers against all rules
+			valid = False
+			for rul, rnge in valid_ranges.items():
+				valid = rule_validator(number, rnge)
+				if valid == True:
+					break
+			if valid == False:
+				error_rate += int(number)
+	print(error_rate)		 
+
+##Helper function to run the current number through all the validation ranges
+def rule_validator(num, rng):
+	rngs = rng.split(" or ")
+	first_rng, second_rng = rngs[0].split("-"), rngs[1].split("-")
+	fst = (int(first_rng[0]), int(first_rng[1])+1)
+	snd = (int(second_rng[0]), int(second_rng[1])+1)
+	if int(num) in range(fst[0], fst[1]) or int(num) in range(snd[0], snd[1]):	
+		return True
+	return False			
+
+>>>>>>> f036368b320280c06e7eaa1e2a79a7c67903f622
 
 if __name__=="__main__":
 	ticket()
