@@ -46,15 +46,14 @@ def number_validation(num, rng):
     return False
 
 def ticket_order(valid_ticket_list, dic):
-	pair_list = []
-	for ticket in valid_ticket_list:
-		for index, number in enumerate(ticket.split(",")):
-			for rul, rng in dic.items():
-				if number_validation(number, rng):
-					pair_list.append((index, rul))	
-	print(len(valid_ticket_list))
-	c = Counter(pair_list)
-	print(c.most_common(21))
+    pair_list = []
+    for ticket in valid_ticket_list:
+        for index, number in enumerate(ticket.split(",")):
+            for rul, rng in dic.items():
+                if number_validation(number, rng) == True:
+                    pair_list.append((index, rul))	
+    c = Counter(pair_list)
+    print(c.most_common())
 
 if __name__=="__main__": 
     ticket(ticket_maker(chunks), make_dic(chunks))
