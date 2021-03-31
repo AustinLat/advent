@@ -45,15 +45,24 @@ def number_validation(num, rng):
         return True
     return False
 
+
+##Part two solution below.  Need to find the index that the rule is NOT, and work from there.
 def ticket_order(valid_ticket_list, dic):
     pair_list = []
     for ticket in valid_ticket_list:
         for index, number in enumerate(ticket.split(",")):
             for rul, rng in dic.items():
-                if number_validation(number, rng) == True:
+                #print(f'number is {number} - range is {rng}')
+                #print(number_validation(number, rng))
+                if number_validation(number, rng) == False:
                     pair_list.append((index, rul))	
-    c = Counter(pair_list)
-    print(c.most_common())
+    #print(len(pair_list))
+    for i in pair_list:
+        if i[0] == 0:
+            print(i)
+    #print(pair_list)
+    #c = Counter(pair_list)
+    #print(c.most_common())
 
 if __name__=="__main__": 
     ticket(ticket_maker(chunks), make_dic(chunks))
